@@ -13,4 +13,5 @@ public class Inventori : MonoBehaviour
             if (i == slot)
                 isFull[i] = false;
     }
+    public void SetSlots(GameObject[] slot) => slots = slot;
 }

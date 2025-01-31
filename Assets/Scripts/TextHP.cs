@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class TextHP : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     private Text textHP;
     private void Start()
     {
         textHP = GetComponent<Text>();
     }
-    private void Update() => textHP.text = player.GetComponent<PlayerHealth>().CurrentHealth().ToString();
+    private void Update() { 
+        if (player != null) 
+        textHP.text = player.GetComponent<PlayerHealth>().CurrentHealth().ToString(); 
+    }
+    public void SetPlayer(GameObject player) => this.player = player;
 }

@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,8 +24,10 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector3 direction;
+        if (PhotonView.Get(this.gameObject).IsMine)
+            direction = new Vector3(horizontal, 0f, vertical).normalized;
+        else direction = Vector3.zero;
 
         if (direction.magnitude >= 0.1f)
         {

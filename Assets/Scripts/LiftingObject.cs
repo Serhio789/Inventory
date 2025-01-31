@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,25 +9,26 @@ public class LiftingObject : MonoBehaviour
     private Inventori inventory;
     public GameObject slotButton;
 
-    private void Start()
-    {
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventori>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.CompareTag("Player"))
         {
-            for (int i = 0; i < inventory.slots.Length; i++)
+            if (other.GetComponent<Inventori>() != null)
             {
-                if (inventory.isFull[i] == false)
+                inventory = other.GetComponent<Inventori>();
+                for (int i = 0; i < inventory.slots.Length; i++)
                 {
-                    Destroy(gameObject);
-                    GameObject Clon = Instantiate(slotButton, inventory.slots[i].transform);
-                    Clon.GetComponent<Healing>().SetPlayer(other.GameObject());
-                    Clon.GetComponent<Healing>().SetID(i);
-                    inventory.isFull[i] = true;
-                    break;
+                    if (inventory.isFull[i] == false)
+                    {
+                        PhotonView.Destroy(gameObject);
+                        GameObject Clon = Instantiate(slotButton, inventory.slots[i].transform);
+                        Clon.GetComponent<ItemForPlayer>().SetID(i);
+                        Clon.GetComponent<ItemForPlayer>().SetPlayer(other.gameObject);
+                        inventory.isFull[i] = true;
+                        break;
+                    }
                 }
             }
         }
