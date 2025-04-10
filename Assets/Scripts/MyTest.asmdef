@@ -1,0 +1,24 @@
+{
+    "name": "MyTest",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a738238285a7a8246af046cbf977522f",
+        "GUID:315d634a9ac6d460a9515f5a56be6311",
+        "GUID:831409e8f9d13b5479a3baef9822ad34",
+        "GUID:21b0c8d1703a94250bfac916590cea4f",
+        "GUID:57c32fc907df0f54e8e6e8f0d2488336"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        ""
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Animator animator;
     public float moveSpeed = 5f;
-    private CharacterController controller;
+    [HideInInspector]public CharacterController controller;
 
     void Start()
     {

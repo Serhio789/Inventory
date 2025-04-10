@@ -15,22 +15,26 @@ public class LiftingObject : MonoBehaviour
         
         if (other.CompareTag("Player"))
         {
+
             if (other.GetComponent<Inventori>() != null)
             {
-                inventory = other.GetComponent<Inventori>();
-                for (int i = 0; i < inventory.slots.Length; i++)
+                if (PhotonView.Get(other).IsMine)
                 {
-                    if (inventory.isFull[i] == false)
+                    inventory = other.GetComponent<Inventori>();
+                    for (int i = 0; i < inventory.slots.Length; i++)
                     {
-                        PhotonView.Destroy(gameObject);
-                        GameObject Clon = Instantiate(slotButton, inventory.slots[i].transform);
-                        Clon.GetComponent<ItemForPlayer>().SetID(i);
-                        Clon.GetComponent<ItemForPlayer>().SetPlayer(other.gameObject);
-                        inventory.isFull[i] = true;
-                        break;
+                        if (inventory.isFull[i] == false)
+                        {
+                            GameObject Clon = Instantiate(slotButton, inventory.slots[i].transform);
+                            Clon.GetComponent<ItemForPlayer>().SetID(i);
+                            Clon.GetComponent<ItemForPlayer>().SetPlayer(other.gameObject);
+                            inventory.isFull[i] = true;
+                            break;
+                        }
                     }
                 }
             }
+            PhotonView.Destroy(gameObject);
         }
     }
 }
